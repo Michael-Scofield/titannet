@@ -7,7 +7,7 @@ nfsurl=""
 folder=""
 already_install_NFS=2
 containers=4 # 默认容器数量为4
-storage=204800 # 新增容器限制大小
+storage=64 # 新增容器限制大小
 meson_gaga_code=""
 meson_cdn_code=""
 
