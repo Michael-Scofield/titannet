@@ -13,7 +13,7 @@ meson_cdn_code=""
 
 # titan环境变量定义
 DAEMON_CRON_SCRIPT_PATH="/usr/local/bin/check_titan_daemon.sh"
-TITAN_EDGE_BIN_URL="https://github.com/Titannet-dao/titan-node/releases/download/v0.1.16/titan_v0.1.16_linux_amd64.tar.gz"
+TITAN_EDGE_BIN_URL="https://zeenyun-temp.oss-cn-shanghai.aliyuncs.com/titan_v0.1.13.tar.gz"
 
 # weason_gaga环境变量定义
 MESON_GAGA_BIN_URL="https://assets.coreservice.io/public/package/60/app-market-gaga-pro/1.0.4/app-market-gaga-pro-1_0_4.tar.gz"
@@ -209,7 +209,7 @@ run_containers() {
     for i in $(seq 1 $containers)
     do
     #-v "${folder}/data:/root/.titanedge/storage/assets"
-        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.2
+        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.3
     done
     echo "******************所有Docker实例启动完成******************"
 }
@@ -352,7 +352,7 @@ init_docker(){
     systemctl start docker
     systemctl enable docker
     # 拉取指定的Docker镜像
-    docker pull docker.io/nezha123/titan-edge:1.2
+    docker pull docker.io/nezha123/titan-edge:1.3
     echo "******************Docker安装脚本执行完毕******************"
 }
 
