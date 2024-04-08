@@ -294,7 +294,7 @@ install_docker(){
             "debian"|"ubuntu")
                 echo "******************在Debian/Ubuntu上安装Docker******************"
                 sudo apt-get update
-                sudo snap install -y docker
+                sudo apt-get install -y docker
                 ;;
             "centos"|"rhel"|"fedora"|"opencloudos")
                 echo "******************在CentOS/RHEL/Fedora/OpenCloudOS上安装Docker******************"
