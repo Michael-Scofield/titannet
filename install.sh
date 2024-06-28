@@ -280,7 +280,7 @@ check_install(){
     fi
     local running_containers
     running_containers=$(docker ps -q | wc -l) # 获取当前运行的容器数量
-    if [ "$running_containers" -gt 5 ]; then
+    if [ "$running_containers" -gt 15 ]; then
         echo "当前运行的Docker容器数量为 $running_containers，大于2，已经退出..."
         exit 1
     else
