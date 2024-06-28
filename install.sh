@@ -179,7 +179,8 @@ set_storage(){
     for i in $(seq 1 $containers)
     do
         echo "******************正在修改容器$titan-edge0$i的存储配置******************"
-        sed -i "s/#StorageGB = 64/StorageGB = $storage/" "/${folder}/storage-$i/config.toml"
+        sed -i "s/#StorageGB = [0-9]*/StorageGB = $storage/" "/mnt/storage-$i/config.toml"
+        sed -i "s/StorageGB = [0-9]*/StorageGB = $storage/" "/mnt/storage-$i/config.toml"
         echo "******************重启容器$titan-edge0$i以应用新的存储配置******************"
         docker restart titan-edge0$i
     done
@@ -209,7 +210,7 @@ run_containers() {
     for i in $(seq 1 $containers)
     do
     #-v "${folder}/data:/root/.titanedge/storage/assets"
-        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge:1.4
+        docker run --name titan-edge0$i -d -v "${folder}/storage-$i:/root/.titanedge" nezha123/titan-edge
     done
     echo "******************所有Docker实例启动完成******************"
 }
@@ -279,7 +280,7 @@ check_install(){
     fi
     local running_containers
     running_containers=$(docker ps -q | wc -l) # 获取当前运行的容器数量
-    if [ "$running_containers" -gt 2 ]; then
+    if [ "$running_containers" -gt 5 ]; then
         echo "当前运行的Docker容器数量为 $running_containers，大于2，已经退出..."
         exit 1
     else
@@ -352,7 +353,7 @@ init_docker(){
     systemctl start docker
     systemctl enable docker
     # 拉取指定的Docker镜像
-    docker pull docker.io/nezha123/titan-edge:1.4
+    docker pull docker.io/nezha123/titan-edge
     echo "******************Docker安装脚本执行完毕******************"
 }
 
@@ -362,8 +363,7 @@ main_install(){
     check_use_nfs
     case $type in
         1)
-            echo "******************您选择了安装5个容器***********************"
-            containers=5 
+            echo "******************您选择了容器安装模式***********************"
             sleep 2
             ;;
        2)
